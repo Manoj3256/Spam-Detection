@@ -3,12 +3,13 @@ from contextlib import asynccontextmanager
 from pydantic import BaseModel
 import joblib
 
+
 models={}
 @asynccontextmanager
 async def lifespan(app:FastAPI):
     #loading the models
-    models["vectorizer"]=joblib.load("vectorizer_file.pkl")
-    models["predictor"]=joblib.load("model_file.pkl")
+    models["vectorizer"]=joblib.load("models/vectorizer_file.pkl")
+    models["predictor"]=joblib.load("models/model_file.pkl")
     yield
     models.clear()
 
