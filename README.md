@@ -1,12 +1,14 @@
-# Spam Detection using Machine Learning
+# Spam Detection using Machine Learning (Dockerized)
 
 A machine learning project that classifies emails/SMS messages as Spam or Ham (Not Spam) using Natural Language Processing (NLP) and multiple classification algorithms.
+And creating a API using fastapi and dockerizing it for deploying.
 
 ---
 
 ## Project Overview
 
 Spam detection is one of the classic applications of Machine Learning. In this project, raw text messages are cleaned, transformed into numerical features using TF-IDF Vectorization, and classified using multiple ML models. The models are then compared based on Precision, Recall, and F1 Score to find the best performer.
+Used Fastapi for API and dockerized it with compose file for simple key to start.
 
 ---
 
@@ -17,9 +19,16 @@ Spam Detection/
 │
 ├── data/
 │   └── spam.csv               # Dataset
-│
+├── app/
+│   ├──appAPI.py               # API file
+│   └──models/                 # models
+│       ├── vectorizer_file.pkl
+│       └── model_file.pkl
+├── Dockerfile                 # docker file
+├── compose.yaml               # Compose for running container
 ├── model.ipynb                # Notebook
 ├── requirements.txt           # Required libraries
+├── .gitignore                 # To avoid pushing models and __pycache__ folder to git repository
 └── README.md                  # Project documentation(current file)
 ```
 
@@ -33,26 +42,9 @@ Spam Detection/
 | Pandas & NumPy | Data manipulation      |
 | NLTK           | Text preprocessing     |
 | Scikit-learn   | ML models & evaluation |
-| Matplotlib     | For visualization      |
-
----
-
-## Project Pipeline
-
-```
-Raw Text Data
-     ↓
-Data Preprocessing (Lowercase, Tokenization, 
-Remove Special Characters, Stop Words, Stemming)
-     ↓
-TF-IDF Vectorization
-     ↓
-Train / Test Split (80/20)
-     ↓
-Model Training & Comparison
-     ↓
-Evaluation (Precision, Recall, F1 Score)
-```
+|  uvicorn       | server to  run FastAPI |
+|   joblib       | For downloading and loading models |
+|   fastapi      |     creating API       |
 
 ---
 
@@ -71,7 +63,7 @@ Evaluation (Precision, Recall, F1 Score)
 | Model                           | Description                                 |
 |---------------------------------|---------------------------------------------|
 | Logistic Regression             | Linear classifier for binary classification |
-| Support Vector Classifier (SVC) | Finds optimal decision boundary             |
+| Support Vector Classifier(Final)| Finds optimal decision boundary             |
 | Random Forest                   | Ensemble of decision trees                  |
 | Decision Tree                   | Tree-based rule learning                    |
 | K-Nearest Neighbors (KNN)       | Distance-based classification               |
@@ -97,45 +89,13 @@ Evaluation (Precision, Recall, F1 Score)
 ### Best Model: Support Vector Classifier (SVC)
 SVC achieved the best F1 Score of 0.918, making it the most balanced model for spam detection in terms of both Precision and Recall.
 
----
-
-## How to Run
-
-1. Clone the repository
-```bash
-git clone https://github.com/Manoj3256/spam-detection.git
-cd spam-detection
-```
-2. Install required libraries
-```bash
-pip install -r requirements.txt
-```
-3. Download NLTK data (run once)
-```python
-import nltk
-nltk.download('stopwords')
-nltk.download('punkt')
-```
-4. Open and run the notebook
-```bash
-jupyter notebook model.ipynb
-```
----
-
-## Visualization
-
-The project includes a grouped bar chart comparing Precision vs Recall across all models, making it easy to visually identify the best performing classifier.
 
 ---
+
 
 ## References
 
 - Hands-On Machine Learning with Scikit-Learn, Keras and TensorFlow
+- https://docs.docker.com/get-started/workshop Dockers official website (tutorial)
+- https://fastapi.tiangolo.com/tutorial/  FastAPI official website (tutorial)
 ---
-
-## Author
-
-Manoj  
-Feel free to connect and give feedback
-
-Thank You!
